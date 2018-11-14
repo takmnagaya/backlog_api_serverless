@@ -2,7 +2,6 @@ package main
 
 import (
 	"bytes"
-	"context"
 	"encoding/json"
 	"fmt"
 
@@ -17,10 +16,10 @@ import (
 type Response events.APIGatewayProxyResponse
 
 // Handler is our lambda handler invoked by the `lambda.Start` function call
-func Handler(ctx context.Context) (Response, error) {
+func Handler(request events.APIGatewayProxyRequest) (Response, error) {
 	var buf bytes.Buffer
 
-	fmt.Println(ctx)
+	fmt.Println(request.QueryStringParameters)
 	body, err := json.Marshal(map[string]interface{}{
 		"message": "Go Serverless v1.0! Your function executed successfully!",
 	})
